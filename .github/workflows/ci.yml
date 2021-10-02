@@ -36,5 +36,4 @@ jobs:
       - name: display result
         run: |
           pwd
-          tree .
           yamldirs .
