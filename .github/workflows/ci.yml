@@ -23,12 +23,14 @@ jobs:
       PYVER: ${{ matrix.python-version}}
       LOGDIR: ghlogs/${{ matrix.python-version}}
     steps:
+      - uses: actions/checkout@v2
+
       - name: setup directories
         run: |
           mkdir -p $PIP_CACHE_DIR
           mkdir -p $LOGDIR
           export
-      - uses: actions/checkout@v2
+      
       - name: pipinstall
         run: |
           pip install -r requirements.txt
