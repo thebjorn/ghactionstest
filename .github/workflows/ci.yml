@@ -10,7 +10,7 @@ jobs:
   ci:
     name: Continuous Integration
     runs-on: ${{ matrix.os }}
-    container: thebjorn/pydeps-agent:ci-${{ matrix.python-version }}
+    # container: thebjorn/pydeps-agent:ci-${{ matrix.python-version }}
     outputs:
       package_version: ${{ steps.proj_ver_determiner.outputs.package_version }}
       package_version_tag: ${{ steps.proj_ver_determiner.outputs.package_version_tag }}
@@ -25,6 +25,9 @@ jobs:
       LOGDIR: ./ghlogs/${{ matrix.python-version}}
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
 
       - name: setup directories
         run: |
