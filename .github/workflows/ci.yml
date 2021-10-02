@@ -21,7 +21,7 @@ jobs:
         python-version: [ 2.7, 3.9 ]
     env:
       PYVER: ${{ matrix.python-version}}
-      LOGDIR: ghlogs/$PYVER
+      LOGDIR: ghlogs/${{ matrix.python-version}}
     steps:
       - name: setup directories
         run: |
@@ -35,4 +35,6 @@ jobs:
 
       - name: display result
         run: |
+          pwd
+          tree .
           yamldirs .
