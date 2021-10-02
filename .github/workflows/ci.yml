@@ -4,6 +4,7 @@ on: [ push, pull_request, workflow_dispatch ]
 
 env:
   DEFAULT_BRANCH: master
+  PIP_CACHE_DIR: /tmp/pipcache
 
 jobs:
   ci:
@@ -21,6 +22,10 @@ jobs:
     env:
       PYVER: ${{ matrix.python-version}}
     steps:
+      - name: setup directories
+        run: |
+          mkdir -p $PIP_CACHE_DIR
+          export
       - uses: actions/checkout@v2
       - name: pipinstall
         run: |
