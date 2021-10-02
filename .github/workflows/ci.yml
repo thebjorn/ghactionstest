@@ -5,6 +5,8 @@ on: [ push, pull_request, workflow_dispatch ]
 env:
   DEFAULT_BRANCH: master
   PIP_CACHE_DIR: /tmp/pipcache
+  RELEASE_OS: ubuntu-latest
+  RELEASE_PY: 3.9
 
 jobs:
   ci:
@@ -18,22 +20,26 @@ jobs:
       should_deploy: ${{ steps.proj_ver_determiner.outputs.should_deploy }}
     strategy:
       matrix:
-        python-version: [ 2.7, 3.9 ]
+        python-version: [ 2.7, 3.9, 3.10 ]
         os: [ubuntu-latest, windows-latest, macos-latest]
     env:
       PYVER: ${{ matrix.python-version}}
       LOGDIR: ./ghlogs/${{ matrix.python-version}}
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
 
+      - uses: ts-graphviz/setup-graphviz@1
+
       - name: setup directories
         shell: bash
         run: |
           mkdir -p $PIP_CACHE_DIR
           mkdir -p $LOGDIR
+          touch $LOGDIR/hello-world.txt
 
       - name: printenv
         shell: python
@@ -48,9 +54,15 @@ jobs:
           pip install -r requirements.txt
           pip list | tee $LOGDIR/pip-list.log
 
-      - name: display result
+      - name: rundot
+        run: dot -Tsvg -o $LOGDIR/ab.svg ab.dot
+
+      - name: yamldirs
+        run: yamldirs .
+        
+      - name: printlogdir
+        shell: bash
         run: |
           pwd
-          yamldirs .
           ls -l .
           ls -l ./ghlogs
