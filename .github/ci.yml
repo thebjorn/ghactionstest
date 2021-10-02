@@ -1,0 +1,31 @@
+name: CI/CD Pipeline
+
+on: [ push, pull_request, workflow_dispatch ]
+
+env:
+  DEFAULT_BRANCH: master
+
+jobs:
+  ci:
+    name: Continuous Integration
+    runs-on: ubuntu-20.04
+    container: thebjorn/pydeps-agent:ci-${{ matrix.python-version }}
+    outputs:
+      package_version: ${{ steps.proj_ver_determiner.outputs.package_version }}
+      package_version_tag: ${{ steps.proj_ver_determiner.outputs.package_version_tag }}
+      latest_github_tag: ${{ steps.proj_ver_determiner.outputs.latest_github_tag }}
+      should_deploy: ${{ steps.proj_ver_determiner.outputs.should_deploy }}
+    strategy:
+      matrix:
+        python-version: [ 2.7, 3.9 ]
+    env:
+      PYVER: ${{ matrix.python-version}}
+    steps:
+      - uses actions/checkout@v2
+      - name: pipinstall
+        run: |
+          pip install -r requirements.txt
+
+      - name: display result
+        run: |
+          yamldirs . --dot -x .git
