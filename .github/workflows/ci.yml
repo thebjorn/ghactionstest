@@ -21,10 +21,12 @@ jobs:
         python-version: [ 2.7, 3.9 ]
     env:
       PYVER: ${{ matrix.python-version}}
+      LOGDIR: ghlogs/$PYVER
     steps:
       - name: setup directories
         run: |
           mkdir -p $PIP_CACHE_DIR
+          mkdir -p $LOGDIR
           export
       - uses: actions/checkout@v2
       - name: pipinstall
@@ -33,4 +35,4 @@ jobs:
 
       - name: display result
         run: |
-          yamldirs . --dot -x .git
+          yamldirs .
