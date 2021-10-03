@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         # python-version: [ '2.7', '3.9', '3.10.0-rc.2' ]
-        python-version: [ '3.9', '3.10.0-rc.2' ]
+        python-version: [ '3.9' ]  #, '3.10.0-rc.2' ]
         os: [ubuntu-latest] #, windows-latest]  #, macos-latest]
     env:
       PYVER: ${{ matrix.python-version}}
@@ -87,7 +87,7 @@ jobs:
     # on:
     #   tags:
     #     - v*
-    runs-on: ubuntu-latest
+    runs-on: ${{ RELEASE_OS }}
     steps:
       # - uses: actions/checkout@v2
 
