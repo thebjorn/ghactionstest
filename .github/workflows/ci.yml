@@ -32,7 +32,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: ts-graphviz/setup-graphviz@1
+      - uses: ts-graphviz/setup-graphviz@v1
 
       - name: setup directories
         shell: bash
