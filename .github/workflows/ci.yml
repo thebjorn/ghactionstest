@@ -90,16 +90,13 @@ jobs:
     # on:
     #   tags:
     #     - v*
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ ${{ "ubuntu-latest" }} ]
+    runs-on: ubuntu-latest
     steps:
       # - uses: actions/checkout@v2
 
-      # - uses: actions/setup-python@v2
-      #   with:
-      #     python-version: $RELEASE_PY
+      - uses: actions/setup-python@v2
+        with:
+          python-version: $RELEASE_PY
 
       - name: printenv
         shell: python
