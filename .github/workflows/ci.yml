@@ -10,7 +10,7 @@ env:
 
 jobs:
   ci:
-    name: Continuous Integration
+    name: CI
     runs-on: ${{ matrix.os }}
     # container: thebjorn/pydeps-agent:ci-${{ matrix.python-version }}
     outputs:
@@ -42,6 +42,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: failing job
+        shell: bash
+        run: false
+
       - uses: ts-graphviz/setup-graphviz@v1
 
       - name: setup directories
@@ -69,6 +73,7 @@ jobs:
 
       
       - name: Upload pytest log as artifact
+        if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
           name: Python ${{ matrix.python-version }} - artifacts
@@ -85,7 +90,7 @@ jobs:
           ls -l ./ghlogs
 
   cd:
-    name: Continuous Deployment
+    name: CD
     needs: ci
     # on:
     #   tags:
@@ -96,7 +101,7 @@ jobs:
 
       - uses: actions/setup-python@v2
         with:
-          python-version: $RELEASE_PY
+          python-version: ${{ env.RELEASE_PY }}
 
       - name: printenv
         shell: python
