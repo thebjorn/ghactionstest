@@ -23,6 +23,10 @@ jobs:
         # python-version: [ '2.7', '3.9', '3.10.0-rc.2' ]
         python-version: [ '3.9' ]  #, '3.10.0-rc.2' ]
         os: [ubuntu-latest] #, windows-latest]  #, macos-latest]
+        # include:
+        #   - python-version: '3.10.0-rc.2'
+        #     os: ubuntu-latest
+        #     experimental: true
     env:
       PYVER: ${{ matrix.python-version}}
       LOGDIR: ./ghlogs/${{ matrix.python-version}}
@@ -89,7 +93,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
+        os: [ ${{ "ubuntu-latest" }} ]
     steps:
       # - uses: actions/checkout@v2
 
