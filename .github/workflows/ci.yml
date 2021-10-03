@@ -68,8 +68,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Python ${{ matrix.python-version }} - artifacts
-          path: $LOGDIR/*
-
+          path: ${{ env.LOGDIR }}/*
 
       - name: yamldirs
         run: yamldirs .
