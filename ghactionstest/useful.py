@@ -13,7 +13,7 @@ def foo():
         max_vals[tp] = max(mylist, key=key)
 
     print('-' * 20)
-    print([max(mylist, key=lambda item: item[0] if item[1] == tp else 0) 
+    print([max(mylist, key=lambda item: item[0] if item[1] == tp else 0)
            for tp in {v for _, v in mylist}])
     print('-' * 20)
         
