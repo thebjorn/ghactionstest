@@ -90,7 +90,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [${{ env.RELEASE_OS}}]
+        os: [ ${{ env.RELEASE_OS}} ]
     steps:
       # - uses: actions/checkout@v2
 
