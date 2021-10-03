@@ -87,7 +87,10 @@ jobs:
     # on:
     #   tags:
     #     - v*
-    runs-on: ${{ RELEASE_OS }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [${{ env.RELEASE_OS}}]
     steps:
       # - uses: actions/checkout@v2
 
