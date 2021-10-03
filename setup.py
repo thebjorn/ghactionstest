@@ -9,7 +9,7 @@ import io
 
 import setuptools
 
-version='1.0.0'
+version = '1.0.0'
 
 setuptools.setup(
     name='ghactionstest',
