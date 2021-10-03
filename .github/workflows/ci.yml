@@ -6,7 +6,7 @@ env:
   DEFAULT_BRANCH: master
   PIP_CACHE_DIR: /tmp/pipcache
   RELEASE_OS: ubuntu-latest
-  RELEASE_PY: 3.9
+  RELEASE_PY: '3.9'
 
 jobs:
   ci:
@@ -20,7 +20,7 @@ jobs:
       should_deploy: ${{ steps.proj_ver_determiner.outputs.should_deploy }}
     strategy:
       matrix:
-        python-version: [ 2.7, 3.9, 3.10 ]
+        python-version: [ '2.7', '3.9', '3.10' ]
         os: [ubuntu-latest, windows-latest, macos-latest]
     env:
       PYVER: ${{ matrix.python-version}}
