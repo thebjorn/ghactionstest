@@ -87,13 +87,13 @@ jobs:
     # on:
     #   tags:
     #     - v*
-    runs-on: ${{ env.RELEASE_OS }}
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v2
-        with:
-          python-version: $RELEASE_PY
+      # - uses: actions/setup-python@v2
+      #   with:
+      #     python-version: $RELEASE_PY
 
       - name: printenv
         shell: python
@@ -101,4 +101,4 @@ jobs:
           import os,sys
           print(sys.version_info)
           for k, v in os.environ.items():
-              print(k, v)          
+              print(k, v)
