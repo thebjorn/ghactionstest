@@ -7,10 +7,12 @@ def foo():
 
     max_vals = {}
     for tp in {v for _, v in mylist}:
-        max_vals[tp] = max(mylist, key=lambda item: item[0] if item[1]==tp else 0)
+        max_vals[tp] = max(mylist, 
+                           key=lambda item: item[0] if item[1] == tp else 0)
 
     print('-' * 20)
-    print([max(mylist, key=lambda item: item[0] if item[1]==tp else 0) for tp in {v for k, v in mylist}])
+    print([max(mylist, key=lambda item: item[0] if item[1] == tp else 0) 
+           for tp in {v for _, v in mylist}])
     print('-' * 20)
         
     print([(k, v) for k, v in mylist if v == 'int'])
@@ -18,11 +20,7 @@ def foo():
     max_values = {tp: 0 for tp in types}
     types = max_values.keys()
 
-
-    max_values
-
     print("TYPES:", types)
-
 
     print("TYPES:", types)
 
@@ -30,7 +28,6 @@ def foo():
     #     max_values[data_type] = max(value, max_values[data_type])
 
     new_list = [(val, tp) for val, tp in mylist if max_values[tp] == val]
-
 
     print(new_list)
     print(max_values)
