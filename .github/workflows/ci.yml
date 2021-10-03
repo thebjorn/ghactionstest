@@ -63,6 +63,14 @@ jobs:
       - name: rundot
         run: dot -Tsvg -o $LOGDIR/ab.svg ab.dot
 
+      
+      - name: Upload pytest log as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Python ${{ matrix.python-version }} - artifacts
+          path: $LOGDIR/*
+
+
       - name: yamldirs
         run: yamldirs .
         
@@ -79,7 +87,7 @@ jobs:
     # on:
     #   tags:
     #     - v*
-    runs-on: $RELEASE_OS
+    runs-on: ${{ env.RELEASE_OS }}
     steps:
       - uses: actions/checkout@v2
 
