@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ '2.7', '3.9', '3.10.0-rc.2' ]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]  #, macos-latest]
     env:
       PYVER: ${{ matrix.python-version}}
       LOGDIR: ./ghlogs/${{ matrix.python-version}}
